@@ -1,0 +1,84 @@
+# Install and setup
+
+Works on Android 12 or newer. It looks best on phones with a centred punch-hole camera. Notches and side punch-holes work too; use the offsets to place the island.
+
+## 1. Install the APK
+
+1. Download `DynamicIsland-X.Y.Z.apk` from the [latest release](https://github.com/genessiscode/dynamic-island-android/releases/latest).
+2. Open it. Allow your browser or file manager to install unknown apps if Android asks.
+3. Play Protect may warn that the developer is unknown because the app is not on the Play Store. Tap **More details**, then **Install anyway**. The full source is in this repository.
+
+## First launch
+
+The app opens with a 3-step welcome: what the island does, the two permissions (with live checkmarks and a button for restricted settings), and **Keep it running** for your phone brand. You can reopen the last two steps from **Settings → Help**. After that the app has three tabs: **Island**, **Modules** and **Settings**.
+
+## 2. Unlock restricted settings (Android 13+)
+
+Android blocks notification access and accessibility for apps installed from a file until you allow them. This is a system safety feature. No app can bypass it.
+
+1. Open Dynamic Island, go to **Step 1 → Notification access**, and try to switch it on. You see "Controlled by restricted setting". That is expected.
+2. Go back, tap **Open App info**, open the top-right menu, tap **Allow restricted settings**, and confirm with your PIN or fingerprint.
+3. Switch on **Notification access** and **Accessibility → Downloaded apps → Dynamic Island**.
+
+If your phone hides **Allow restricted settings**, turn on USB debugging and run this from a computer:
+
+```bash
+adb shell appops set com.genessiscode.dynamicisland ACCESS_RESTRICTED_SETTINGS allow
+```
+
+To enable everything from ADB in one go:
+
+```bash
+adb shell cmd notification allow_listener com.genessiscode.dynamicisland/com.genessiscode.dynamicisland.service.IslandNotificationListener
+adb shell settings put secure enabled_accessibility_services com.genessiscode.dynamicisland/com.genessiscode.dynamicisland.service.IslandAccessibilityService
+adb shell settings put secure accessibility_enabled 1
+```
+
+The second command replaces your list of enabled accessibility services. If you use others, such as a password manager, add them separated by `:`.
+
+## 3. Keep it running by brand
+
+Phone makers stop background apps to save battery. When that happens the island disappears. The app detects your brand and shows the right buttons under **Step 2**. The full community guides are at [dontkillmyapp.com](https://dontkillmyapp.com).
+
+| Brand | What to do |
+|---|---|
+| Xiaomi, Redmi, POCO (HyperOS, MIUI) | Autostart on. Battery saver to **No restrictions**. Other permissions: **Show on lock screen** and **Display pop-up windows while running in background**. Lock the app in Recents. |
+| Samsung (One UI) | Settings → Apps → Dynamic Island → Battery → **Unrestricted**. Battery → Background usage limits → add to **Never sleeping apps**. |
+| OnePlus, OPPO, realme (OxygenOS, ColorOS) | App info → Battery → **Allow background activity** and **Allow auto launch**. Lock the app in Recents. |
+| vivo, iQOO | i Manager → App manager → Autostart on. Battery → **High background power consumption** → allow. |
+| Motorola, Nothing, Pixel | Usually fine. Set App info → Battery → **Unrestricted** if the island stops after a while. |
+| Huawei, Honor | App launch → Dynamic Island → **Manage manually** → enable all three toggles. |
+
+## 4. Fit it to your camera
+
+In **Settings → Look and fit**:
+
+1. Turn on **Calibrate**. The resting island turns red.
+2. Adjust **Camera hole size fine-tune**, **Horizontal offset** and **Vertical offset** until the red circle covers the camera.
+3. Turn **Calibrate** off. At rest the island is now invisible.
+
+Choose a theme, width, height, roundness, opacity and animation speed. The real island at the top updates live.
+
+## 5. Keep it up to date
+
+Install the **Updater** module (`Island-Module-Updater-v….apk`, listed first in **Modules → Get more**). It checks GitHub once a day and shows new versions in **Settings → Software Update**, as a tile on the Island tab and as a notification. Tap **Update All**. Android asks once whether Updater may install apps, then asks you to confirm each app. The island app itself still never goes online.
+
+Without the Updater, download new versions from [Releases](https://github.com/genessiscode/dynamic-island-android/releases/latest) as before.
+
+## 6. Meeting Notes in Hindi or Hinglish
+
+1. In **Meeting Notes**, under **Language**, pick **हिन्दी** or **Hindi + English**.
+2. Meeting Notes checks whether your phone's own speech recognition can do Hindi offline. If it offers **Download Hindi for Android**, tap it (Android 13+). You then get live captions.
+3. If your phone cannot, install the **Speech Pack** module (`Island-Module-SpeechPack-v….apk`), open it and download the **Standard** model (365 MB). **Best** is 1.0 GB and more accurate for phones with 8 GB of memory. Use Wi-Fi. Meeting Notes then transcribes Hindi right after each recording.
+4. To transcribe a recording you already have, tap **Import Audio File**.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| Nothing appears | Check **Diagnostics** at the bottom of the app. **Accessibility running** and **Listener connected** must both be true. |
+| Island disappears after a while | Redo step 3 for your brand. |
+| Tapping the island does not open apps on Xiaomi | Allow **Display pop-up windows while running in background**. |
+| Island hidden during videos and games | That is **Hide in full-screen apps**, which is off by default. Turn it off if your skin misreports full screen. |
+| Wrong position or size | Use Calibrate and the offsets, then **Reset look and position**. |
+| Still stuck | [Open an issue](https://github.com/genessiscode/dynamic-island-android/issues/new/choose) with your phone model and a Diagnostics screenshot. |

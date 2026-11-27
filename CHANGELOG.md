@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.2.11-genessiscode (27 Nov 2026): fixed-width island pill
+- **The pill no longer changes width.** Idle and compact states now use one width from **Settings → Size and shape → Pill width**. A message preview no longer widens the pill or makes it shrink when the preview ends. The preview card still opens at its own pop-up width.
+- **The pill can go narrower.** The **Pill width** slider now starts at 30% instead of 60%.
+- **Expanded card text stays readable.** Media elapsed/total time now sit on small contrast plates, and the artwork scrim is darker at the top and bottom. Tinted notification cards pick dark or light text from the actual card colour, so a bright accent no longer washes the title or body out.
+- **Google live sports appear again.** The Google app posts its followed-match card without the ongoing flag, so the old live-score gate dropped every match. Sports cards in Google's sports group or with “Live score” text are now accepted, including Groningen vs Willem II.
+- **The island fades between compact and idle.** One fixed pill width removed the old resize, so leaving the pill for the camera-hole idle now fades out in place, and the next activity fades back in instead of cutting in one frame.
+- **Only live Google matches enter the activity bar.** Upcoming fixtures (the alarm card and win-probability line) are filtered out and no longer fall through to the generic notification slot.
+- **The match minute is live.** The sports card shows the current minute and half, and advances it while the card stays open. Provider emoji such as the alarm, dice and ball are stripped from the displayed text.
+- **Sports colours come from the teams.** The compact pill background is now a gradient built from the two crest/flag colours, sampled from the loaded badges instead of a fixed blue.
+- **The gradient reaches the card, in every theme.** The expanded sports card uses the same two club colours, lifted for Glass, Liquid Glass and the light theme so the dark type stays readable. The compact pill keeps the stronger version behind the badges.
+- **Finished games leave the bar.** Google keeps the final score in the same sports group; "ENG won by 7" now reads as finished, not live, so the final card is removed instead of lingering.
+- **The squiggly seek line meets the playhead.** The played ripple now has a heavier stroke, swells in the middle and tapers to the centreline at the seek bar; the unplayed side is a plain guide line. Goal cards also take their minute from the title ("at 37'") instead of resetting to zero.
+
+## 3.2.10-genessiscode (27 Nov 2026): dismiss previews on collapse
+- **Collapsing a notification preview clears it.** Swiping, long-pressing or tapping outside a message or generic notification now removes it from the island and returns the pill to idle immediately. The notification stays in the Inbox; the automatic preview timeout still leaves the compact pill until its normal expiry.
+
+## 3.2.9-genessiscode (27 Nov 2026): look presets, cleaner modules, live badges
+- **First-run look presets.** Onboarding now asks for **Low**, **Mid** or **High** and preselects the one that fits the phone: Low on low-RAM/four-core devices, High on eight-core flagships with 7 GB+ RAM, Mid otherwise. Low keeps the 20 fps motion floor and freezes the compact equalizer; High enables the gradient equalizer and spinning album art. Every switch stays editable in **Settings → Look and fit**.
+- **Modules is just your modules.** Removed the **Get more** catalogue from the Modules tab. Installed module cards and the developer controls stay; catalogue downloads remain with the Updater.
+- **Live sports badges.** Club and national sides resolve their badge by team name. Scoreboard shorthands (MI, RCB, AUS) map to full names, and the card picks the right sport so cricket England does not receive the soccer crest.
+- **Screen recorder fallback.** The bundled recorder's foreground notification now shares the module card's activity id, so a recording that survives a service restart still shows one REC timer instead of disappearing or doubling.
+- **Unread counts over 99.** The tab badge now shows **99+** instead of falling back to 0 when the count no longer parses as an integer.
+- **Lighter background work.** Inbox pruning runs at most every six hours, and the unread count uses the existing Inbox worker instead of a new thread on every refresh.
+- **Delivery demo.** The Try It delivery card uses the moped icon.
+- **Privacy/docs.** Documentation now covers the ESPN team-logo lookup and its network use.
+
 ## 3.2.8-genessiscode (27 Nov 2026): steady island width, sports flags, lighter motion
 - **The compact pill no longer changes width when you skip a track or open and close a card.** Media, timers and live scores use a fixed width instead of measuring their title; the widest activity in the stack sets the width, so swiping between a recording and music never resizes the island.
 - **Live sports shows flags, not a score strip.** The compact pill now carries the two sides' flags or team badges only; the expanded card keeps the score and the match detail. Google's `AUS vs 51/3 (5.1/20) ENG` title shape is parsed correctly.

@@ -10,7 +10,7 @@ Works on Android 12 or newer. It looks best on phones with a centred punch-hole 
 
 ## First launch
 
-The app opens with a 3-step welcome: what the island does, the two permissions (with live checkmarks and a button for restricted settings), and **Keep it running** for your phone brand. You can reopen the last two steps from **Settings → Help**. After that the app has three tabs: **Island**, **Modules** and **Settings**.
+The app opens with a 4-step welcome: what the island does, a **Low / Mid / High** look preset chosen from the phone's CPU and RAM, the two permissions (with live checkmarks and a button for restricted settings), and **Keep it running** for your phone brand. You can reopen the last two steps from **Settings → Help**. After that the app has three tabs: **Island**, **Modules** and **Settings**.
 
 ## 2. Unlock restricted settings (Android 13+)
 
